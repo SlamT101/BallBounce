@@ -2,26 +2,32 @@
 #include <iostream>
 #include <stdlib.h>
 
-int BallRadius = 150;
-
-int posX = 0;
-int posY = 0;
+int BallScale = 10;
 
 int sizeX = sf::VideoMode::getDesktopMode().width;
 int sizeY = sf::VideoMode::getDesktopMode().height;
 
+
+int BallRadius = sizeX*sizeY*0.000001*BallScale;
+
 int MaxX = sizeX - 2 * BallRadius;
 int MaxY = sizeY - 2 * BallRadius;
+
+int posX = rand()%sizeX;
+int posY = rand()%sizeY;
 
 bool BounceX = false;
 bool BounceY = false;
 
 int BounceCount = 0;
 
+
 int main()
 {
     std::system("color 0b");
     std::system("echo Sanity Check");
+
+    //WinConfig();
 
     sf::RenderWindow window(sf::VideoMode(sizeX, sizeY), "Ball Bouncing");
     sf::CircleShape Bigboi(BallRadius);

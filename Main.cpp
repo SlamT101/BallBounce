@@ -7,33 +7,45 @@ int BallScale = 10;
 int sizeX = sf::VideoMode::getDesktopMode().width;
 int sizeY = sf::VideoMode::getDesktopMode().height;
 
+int BallRadius;
 
-int BallRadius = sizeX*sizeY*0.000001*BallScale;
+int MaxX;
+int MaxY;
 
-int MaxX = sizeX - 2 * BallRadius;
-int MaxY = sizeY - 2 * BallRadius;
-
-int posX = rand()%sizeX;
-int posY = rand()%sizeY;
+int posX;
+int posY;
 
 bool BounceX = false;
 bool BounceY = false;
 
 int BounceCount = 0;
 
+void WinConfig(int X, int Y)
+{
+    sizeX = X; 
+    sizeY = Y;
+
+    BallRadius = sizeX * sizeY * 0.000001 * BallScale;
+
+    MaxX = sizeX - 2 * BallRadius;
+    MaxY = sizeY - 2 * BallRadius;
+
+    posX = rand() % sizeX;
+    posY = rand() % sizeY;
+}
 
 int main()
 {
     std::system("color 0b");
     std::system("echo Sanity Check");
 
-    //WinConfig();
+    WinConfig(sizeX, sizeY);
 
     sf::RenderWindow window(sf::VideoMode(sizeX, sizeY), "Ball Bouncing");
+    sf:: Clock Regulator;
     sf::CircleShape Bigboi(BallRadius);
     Bigboi.setFillColor(sf::Color::Blue);
     sf::Color colorArray[6] = {sf::Color::Cyan, sf::Color::Blue, sf::Color::Green, sf::Color::Red, sf::Color::Yellow, sf::Color::White};
-
 
     while (window.isOpen())
     {
@@ -42,6 +54,13 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            if (event.type == sf::Event::Resized)
+            {
+                sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+                window.setView(sf::View(visibleArea));
+                 WinConfig(visibleArea.width, visibleArea.height);
+            }
         }
 
         if (!BounceX)
@@ -51,7 +70,6 @@ int main()
             {
                 BounceX = true;
                 Bigboi.setFillColor(colorArray[rand() % 6]);
-                std::cout << BounceCount << "\n";
                 BounceCount++;
             }
         }
@@ -62,7 +80,6 @@ int main()
             {
                 BounceX = false;
                 Bigboi.setFillColor(colorArray[rand() % 6]);
-                std::cout << BounceCount << "\n";
                 BounceCount++;
             }
         }
@@ -74,7 +91,6 @@ int main()
             {
                 BounceY = true;
                 Bigboi.setFillColor(colorArray[rand() % 6]);
-                std::cout << BounceCount << "\n";
                 BounceCount++;
             }
         }
@@ -85,7 +101,6 @@ int main()
             {
                 BounceY = false;
                 Bigboi.setFillColor(colorArray[rand() % 6]);
-                std::cout << BounceCount << "\n";
                 BounceCount++;
             }
         }

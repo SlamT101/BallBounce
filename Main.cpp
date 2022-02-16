@@ -7,8 +7,11 @@ int BallRadius = 150;
 int posX = 0;
 int posY = 0;
 
-int MaxX = 2560 - 2 * BallRadius;
-int MaxY = 1440 - 2 * BallRadius;
+int sizeX = sf::VideoMode::getDesktopMode().width;
+int sizeY = sf::VideoMode::getDesktopMode().height;
+
+int MaxX = sizeX - 2 * BallRadius;
+int MaxY = sizeY - 2 * BallRadius;
 
 bool BounceX = false;
 bool BounceY = false;
@@ -20,7 +23,7 @@ int main()
     std::system("color 0b");
     std::system("echo Sanity Check");
 
-    sf::RenderWindow window(sf::VideoMode(2560, 1440), "BouncyBall Testing");
+    sf::RenderWindow window(sf::VideoMode(sizeX, sizeY), "Ball Bouncing");
     sf::CircleShape Bigboi(BallRadius);
     Bigboi.setFillColor(sf::Color::Blue);
     sf::Color colorArray[6] = {sf::Color::Cyan, sf::Color::Blue, sf::Color::Green, sf::Color::Red, sf::Color::Yellow, sf::Color::White};

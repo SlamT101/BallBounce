@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         
+        
         {
             "command": "mingw32-make",
             "name": "512 Parking Serives",

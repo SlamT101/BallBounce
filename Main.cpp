@@ -30,7 +30,9 @@ void WinConfig(int X, int Y)
     MaxX = sizeX - 2 * BallRadius;
     MaxY = sizeY - 2 * BallRadius;
 
+    srand(time(0));
     posX = rand() % sizeX;
+    srand(time(0));
     posY = rand() % sizeY;
 }
 

@@ -1,4 +1,4 @@
 @echo off
 color 0b
-set PATH=%PATH%;C:src\bin
+set PATH=%PATH%;src\bin
 Main.exe
